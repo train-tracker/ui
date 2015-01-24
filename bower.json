@@ -20,6 +20,8 @@
     "jquery": "~2.1.1",
     "angular": "~1.2.25",
     "ui-router": "~0.2.11",
-    "restangular": "~1.4.0"
+    "restangular": "~1.4.0",
+    "uikit": "~2.16.2",
+    "bootstrap": "~3.3.2"
   }
 }

@@ -3,10 +3,35 @@ html(lang="en-US",ng-app="app")
   head
     meta(http-equiv="content-type", content="text/html; charset=UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=yes")
+    link(rel="stylesheet", href="css/vendor.css")
     link(rel="stylesheet", href="css/app.css")
     script(src="js/vendor.js")
     script(src="js/views.js")
     script(src="js/app.js")
     script(type="text/javascript").
       require('app')
-  body(ui-view="")
+    title {{ title }}
+    .page-wrapper
+      header.header-2
+        .container
+          .row
+            .navbar.col-sm-12.navbar-fixed-top(role='navigation')
+              .navbar-header
+                button.navbar-toggle(type='button')
+                a.brand(href='#')
+                  img(src='img/logo.png', width='50', height='50', alt='')
+                  |  Train Track
+              .collapse.navbar-collapse
+                ul.nav.pull-right
+                  li.active
+                    a(href='#') Home
+      section.header-2-sub.bg-turquoise
+        .background
+        .container
+          .row
+            .col-sm-8.col-sm-offset-2
+              .hero-unit
+      .content(ui-view="")
+    // footer-1
+    footer.footer-1.bg-turquoise
+      .container
