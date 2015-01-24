@@ -6,6 +6,7 @@ angular.module('routes', ['ui.router'])
   .controller('user', require('./controllers/user'))
   .controller('modules', require('./controllers/modules'))
   .controller('modules.create-edit', require('./controllers/modules/create-edit'))
+  .controller('modules.questions', require('./controllers/questions'))
   .controller('admin', require('./controllers/admin'))
   .controller('classes', require('./controllers/classes'))
   .controller('courses.create-edit', require('./controllers/courses/create-edit'))
@@ -114,6 +115,7 @@ angular.module('routes', ['ui.router'])
           }
         }
       })
+
       /**
        * Module Routes
        */
@@ -122,9 +124,9 @@ angular.module('routes', ['ui.router'])
         template: require('./views/modules'),
         controller: 'modules',
           resolve: {
-              modules: function(Module) {
-                  return Module.getList();
-              }
+            modules: function(Module) {
+              return Module.getList();
+            }
           }
       })
       .state('modules.create', {
@@ -144,6 +146,17 @@ angular.module('routes', ['ui.router'])
         resolve: {
           module: function (modules, $stateParams) {
             return _.find(modules, {id: $stateParams.id})
+          }
+        }
+      })
+      .state('modules.questions', {
+        url: '/:moduleID/questions',
+        template: require('./views/questions/index'),
+        controller: 'modules.questions',
+        resolve: {
+          questions: function(modules, $stateParams) {
+            var module = _.find(modules, {id: $stateParams.moduleID})
+            return module.getQuestions()
           }
         }
       })

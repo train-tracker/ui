@@ -1,0 +1,23 @@
+h3 Questions
+table.table.table-striped.questions
+  tbody(ng-repeat="question in questions")
+    tr
+      td
+        span( editable-text="question.text" e-form='questionForm')
+          |  {{question.text}}
+        span  - ({{question.choices.length}} choices)
+        button.btn.btn-default(ng-click='questionForm.$show()', ng-hide='questionForm.$visible')
+          | Edit
+      td.controls
+        button.btn(ng-click="choicesOpen = !choicesOpen") {{choicesOpen == true ? 'Hide Choices' : 'View Choices' }}
+        button.btn.btn-info(ng-click="saveQuestion(question)", ng-disabled="saving[question.id]")
+          span(ng-hide="saving[question.id]") Save Question
+          span(ng-show="saving[question.id]") Saving...
+        button.btn.btn-danger(ng-click="deleteQuestion(question, $index)") Delete Question
+    tr(ng-show="choicesOpen" ng-repeat="choice in question.choices")
+      td
+        input(type="radio", name="choice-{{question.id}}-{{$index}}", id="choice-{{question.id}}-{{$index}}" value="{{$index+1}}", ng-model="question.correct" ng-change="saveQuestion(question)")
+        label(for="choice-{{question.id}}-{{$index}}" editable-text="choice.text" e-form='choiceForm')
+          |  {{choice.text}}
+        button.btn.btn-default(ng-click='choiceForm.$show()', ng-hide='choiceForm.$visible')
+          | Edit

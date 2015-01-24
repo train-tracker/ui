@@ -9,6 +9,7 @@ angular.module('app',
     'ui.router',
     'ui.bootstrap',
     'restangular',
+    'xeditable',
 
     'common',
     'routes',
@@ -23,3 +24,9 @@ angular.module('app',
   .config(require('./configuration/restangular'))
   .config(require('./configuration/http'))
   .run(require('./bootstrap/session'))
+  .run(function(editableOptions, editableThemes) {
+    editableOptions.theme = 'bs3';
+
+    editableThemes['bs3'].submitTpl = '<button class="btn btn-primary"type="submit">Save</button>';
+    editableThemes['bs3'].cancelTpl = '<button class="btn "type="submit">Cancel</button>';
+  })
