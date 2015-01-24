@@ -6,6 +6,7 @@ angular.module('routes', ['ui.router'])
   .controller('user', require('./controllers/user'))
   .controller('modules', require('./controllers/modules'))
   .controller('admin', require('./controllers/admin'))
+  .controller('classes', require('./controllers/classes'))
   .config(function($stateProvider) {
     $stateProvider
 
@@ -92,12 +93,16 @@ angular.module('routes', ['ui.router'])
       /**
        * Class Routes
        */
-      // Classes
-      //.state('classes', {
-      //  url: '/classes',
-      //  template: require('./views/classes'),
-      //  controller: 'classes',
-      //})
+      .state('classes', {
+        url: '/classes',
+        template: require('./views/classes'),
+        controller: 'classes',
+          resolve: {
+              modules: function(Class) {
+                  return Class.getList();
+              }
+          }
+      })
       /**
        * Course Routes
        */
