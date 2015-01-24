@@ -53,3 +53,10 @@ bower_components
 _public
 /nbproject/private/
 /nbproject
+
+# Ignore Video Files
+*.mov
+*.mpg
+*.mpeg
+*.ogv
+*.webm

@@ -1,1 +1,9 @@
 h1 Password Reset
+form.form-horizontal.col-md-5.col-md-offset-2(ng-submit="passwordReset(email)")
+  .form-group
+    label.col-md-2.control-label Email Address:
+    .col-md-10
+      input.form-control(type="email", ng-model="email", name="passwordReset", placeholder="Enter Email")
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      input.btn.btn-default(type='submit' value="Submit")
