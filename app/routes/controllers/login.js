@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports = function($scope, User) {
+module.exports = function($scope, User, $http) {
     $scope.login = function (user) {
         // Handle login
-        User.post(user).then(function(response) {
+        $http.post(API_ROOT+'/login', data).success(function(){
             console.log(response)
         }).finally(function() {
             console.log("Finally!");
