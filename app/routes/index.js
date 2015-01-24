@@ -83,6 +83,11 @@ angular.module('routes', ['ui.router'])
         url: '/modules',
         template: require('./views/modules'),
         controller: 'modules',
+          resolve: {
+              modules: function(Module) {
+                  return Module.getList();
+              }
+          }
       })
       /**
        * Class Routes

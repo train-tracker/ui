@@ -4,9 +4,9 @@
 
 
 module.exports = function(Restangular) {
-    var Module = Restangular.all('module');
+    var Modules = Restangular.all('modules');
 
     
-    return Module;
+    return Modules;
     
 }

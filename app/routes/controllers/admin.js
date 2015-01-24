@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function($scope, admin ) {
+module.exports = function($scope ) {
 
     $scope.admin = admin;
 
