@@ -1,5 +1,6 @@
 angular.module('routes', ['ui.router'])
   .controller('home', require('./controllers/home'))
+  .controller('login', require('./controllers/login'))
   .config(function($stateProvider) {
     $stateProvider
       .state('home', {
@@ -16,8 +17,9 @@ angular.module('routes', ['ui.router'])
         //   }
         // }
       })
-      .state('test', {
-        url: '/test',
-        template: require('./views/test')
+      .state('login', {
+        url: '/login',
+        template: require('./views/login'),
+        controller: 'login',
       })
   })
