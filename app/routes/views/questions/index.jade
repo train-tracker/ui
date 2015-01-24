@@ -13,7 +13,7 @@ table.table.table-striped.questions
         button.btn.btn-info(ng-click="saveQuestion(question)", ng-disabled="saving[question.id]")
           span(ng-hide="saving[question.id]") Save Question
           span(ng-show="saving[question.id]") Saving...
-        button.btn.btn-danger(ng-click="deleteQuestion(question, $index)") Delete Question
+        button.btn.btn-danger(confirm, message="Are you sure you sure you want to delete this question?" callback="deleteQuestion(question, $index)") Delete Question
     tr(ng-show="choicesOpen" ng-repeat="choice in question.choices")
       td
         input(type="radio", name="choice-{{question.id}}-{{$index}}", id="choice-{{question.id}}-{{$index}}" value="{{$index+1}}", ng-model="question.correct" ng-change="saveQuestion(question)")
@@ -21,3 +21,18 @@ table.table.table-striped.questions
           |  {{choice.text}}
         button.btn.btn-default(ng-click='choiceForm.$show()', ng-hide='choiceForm.$visible')
           | Edit
+.controls
+  button.btn.btn-default(ng-click="newQuestionShowing = true", ng-hide="newQuestionShowing") Add New Question
+form.form-horizontal.col-md-6(ng-submit="createQuestion(newQuestion)" ng-show="newQuestionShowing")
+  .form-group
+    input.form-control(type="text" ng-model="newQuestion.text" placeholder="Question Text")
+  .form-group(ng-repeat="choice in newQuestion.choices track by $index")
+    input(type="radio" ng-model="newQuestion.correct" value="{{$index+1}}" id="newQuestionChoice+{{$index}}")
+    label(for="newQuestionChoice+{{$index}}") {{choice.text}}
+  .form-group(ng-init="choice = {}")
+    .col-md-7
+      input.form-control(type='text', placeholder='Choice', aria-describedby='basic-addon1' ng-model="choice.text")
+    span.col-md-4
+      button.btn.btn-default(type='button' ng-click="addChoice(newQuestion, choice)") Add New Choice
+  .form-group
+    button.btn.btn-primary(ng-click="addNewQuestion(newQuestion)", ng-show="newQuestionShowing") Save New Question
