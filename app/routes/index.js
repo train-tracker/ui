@@ -8,6 +8,7 @@ angular.module('routes', ['ui.router'])
   .controller('modules.create-edit', require('./controllers/modules/create-edit'))
   .controller('admin', require('./controllers/admin'))
   .controller('classes', require('./controllers/classes'))
+  .controller('courses.create-edit', require('./controllers/courses/create-edit'))
   .controller('orgs', require('./controllers/orgs'))
   .controller('orgs.create-edit', require('./controllers/orgs/create-edit'))
   .controller('courses', require('./controllers/courses'))
@@ -52,6 +53,11 @@ angular.module('routes', ['ui.router'])
       .state('reset', {
         url: '/reset',
         template: require('./views/reset'),
+      })
+      // Test route
+      .state('test', {
+        url: '/test',
+        template: require('./views/test'),
       })
       /**
        * User routes
@@ -153,6 +159,27 @@ angular.module('routes', ['ui.router'])
                   return Class.getList();
               }
           }
+      })
+      .state('classes.create', {
+        url: '/create',
+        template: require('./views/classes/create-edit'),
+        controller: 'classes.create-edit',
+        resolve: {
+          org: function () {
+            return {}
+          }
+
+        }
+      })
+      .state('classes.edit', {
+        url: '/:id',
+        template: require('./views/classes/create-edit'),
+        controller: 'classes.create-edit',
+        resolve: {
+          org: function (orgs, $stateParams) {
+            return _.find(orgs, {id: $stateParams.id})
+          }
+        }
       })
       /**
        * Course Routes
