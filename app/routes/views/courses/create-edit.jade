@@ -1,0 +1,14 @@
+form.form-horizontal.col-md-12(ng-submit="submitModule(course, creating)", ng-show="creating || editing")
+  .form-group
+    label.col-md-2.control-label Name:
+    .col-md-10
+      input.form-control(type="text", ng-model="course.name", name="name", placeholder="Name")
+  .form-group
+    label.col-md-2.control-label Description:
+    .col-md-10
+      input.form-control(type="text", ng-model="course.description", name="description", placeholder="Description")
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      button.btn.btn-default(type='submit')
+        span(ng-show="creating") Create
+        span(ng-show="editing") Save

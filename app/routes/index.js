@@ -11,6 +11,7 @@ angular.module('routes', ['ui.router'])
   .controller('orgs', require('./controllers/orgs'))
   .controller('orgs.create-edit', require('./controllers/orgs/create-edit'))
   .controller('courses', require('./controllers/courses'))
+  .controller('courses.create-edit', require('./controllers/courses/create-edit'))
   .config(function($stateProvider) {
     $stateProvider
 
@@ -166,5 +167,25 @@ angular.module('routes', ['ui.router'])
               }
           }
       })
+      .state('courses.create', {
+        url: '/create',
+        template: require('./views/courses/create-edit'),
+        controller: 'courses.create-edit',
+        resolve: {
+          org: function () {
+            return {}
+          }
 
+        }
+      })
+      .state('courses.edit', {
+        url: '/:id',
+        template: require('./views/courses/create-edit'),
+        controller: 'courses.create-edit',
+        resolve: {
+          org: function (orgs, $stateParams) {
+            return _.find(orgs, {id: $stateParams.id})
+          }
+        }
+      })
   })
