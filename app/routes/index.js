@@ -5,6 +5,7 @@ angular.module('routes', ['ui.router'])
   .controller('signup', require('./controllers/signup'))
   .controller('user', require('./controllers/user'))
   .controller('modules', require('./controllers/modules'))
+  .controller('modules.create-edit', require('./controllers/modules/create-edit'))
   .controller('admin', require('./controllers/admin'))
   .config(function($stateProvider) {
     $stateProvider
@@ -88,6 +89,27 @@ angular.module('routes', ['ui.router'])
                   return Module.getList();
               }
           }
+      })
+      .state('modules.create', {
+        url: '/create',
+        template: require('./views/modules/create-edit'),
+        controller: 'modules.create-edit',
+        resolve: {
+          module: function () {
+            return {}
+          }
+
+        }
+      })
+      .state('modules.edit', {
+        url: '/:id',
+        template: require('./views/modules/create-edit'),
+        controller: 'modules.create-edit',
+        resolve: {
+          module: function (modules, $stateParams) {
+            return _.find(modules, {id: $stateParams.id})
+          }
+        }
       })
       /**
        * Class Routes
