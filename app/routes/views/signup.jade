@@ -1,1 +1,29 @@
 h1 Sign-Up Page
+form.form-horizontal.col-md-5.col-md-offset-2(ng-submit="register(user)")
+  .form-group
+    label.col-md-2.control-label First Name:
+    .col-md-10
+      input.form-control(type="text", ng-model="user.firstName", name="firstName", placeholder="First Name")
+  .form-group
+    label.col-md-2.control-label Last Name:
+    .col-md-10
+      input.form-control(type="text", ng-model="user.lastName", name="lastName", placeholder="Last Name")
+  .form-group
+    label.col-md-2.control-label Email:
+    .col-md-10
+      input.form-control(type="text", ng-model="user.email", name="email", placeholder="Email")
+  .form-group
+    label.col-md-2.control-label Username:
+    .col-md-10
+      input.form-control(type="text", ng-model="user.username", name="username", placeholder="Username")
+  .form-group
+    label.col-md-2.control-label Password:
+    .col-md-10
+      input.form-control(type="password", ng-model="user.password", name="password", placeholder="Password")
+  .form-group
+    label.col-md-2.control-label Password Confirm:
+    .col-md-10
+      input.form-control(type="password", ng-model="user.passwordConfirm", name="passwordConfirm", placeholder="Confirm Password")
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      input.btn.btn-default(type='submit' value="Register")

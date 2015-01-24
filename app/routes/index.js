@@ -1,6 +1,7 @@
 angular.module('routes', ['ui.router'])
   .controller('home', require('./controllers/home'))
   .controller('login', require('./controllers/login'))
+  .controller('signup', require('./controllers/signup'))
   .config(function($stateProvider) {
     $stateProvider
       .state('home', {
@@ -66,6 +67,7 @@ angular.module('routes', ['ui.router'])
       // New User signup form
       .state('signup', {
         url: '/signup',
+        controller: 'signup',
         template: require('./views/signup'),
       })
       // Password Reset
@@ -73,5 +75,5 @@ angular.module('routes', ['ui.router'])
         url: '/reset',
         template: require('./views/reset'),
       })
-      
+
   })
