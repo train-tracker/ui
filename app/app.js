@@ -21,3 +21,4 @@ angular.module('app',
       .otherwise("/404")
   })
   .config(require('./configuration/restangular'))
+  .run(require('./bootstrap/session'))
