@@ -63,5 +63,15 @@ angular.module('routes', ['ui.router'])
         url: '/about',
         template: require('./views/about'),
       })
+      // New User signup form
+      .state('signup', {
+        url: '/signup',
+        template: require('./views/signup'),
+      })
+      // Password Reset
+      .state('reset', {
+        url: '/reset',
+        template: require('./views/reset'),
+      })
       
   })
