@@ -1,0 +1,21 @@
+script(type="text/ng-template", id="/default.html")
+  .modal-body
+    h2 {{error.status}}
+    h3 {{error.msg}}
+
+
+script(type="text/ng-template", id="/login.html")
+  .modal-header
+    h1 Login
+  .modal-body
+    form.form-inline(ng-submit="login(user)")
+      .form-group
+        input.form-control(type="text" ng-model="user.email" name="email" placeholder="Email")
+      .form-group
+        input.form-control(type="password" ng-model="user.password" name="password" placeholder="Password")
+      .form-group
+        input.btn.default(type="submit" value="Login")
+  .modal-footer
+    a(ui-sref="signup") Register
+    span  |
+    a(ui-sref="reset") Forgot password?

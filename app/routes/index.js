@@ -1,7 +1,9 @@
 angular.module('routes', ['ui.router'])
+  .controller('error-handler', require('./controllers/error-handler'))
   .controller('home', require('./controllers/home'))
   .controller('login', require('./controllers/login'))
   .controller('signup', require('./controllers/signup'))
+  .controller('user', require('./controllers/user'))
   .config(function($stateProvider) {
     $stateProvider
       .state('home', {

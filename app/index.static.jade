@@ -12,6 +12,8 @@ html(lang="en-US",ng-app="app")
       require('app')
     title {{ title }}
     .page-wrapper
+      .error-handler(ng-controller="error-handler")
+        include routes/views/error-handler
       header.header-2
         .container
           .row
