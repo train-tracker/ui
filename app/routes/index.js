@@ -4,8 +4,14 @@ angular.module('routes', ['ui.router'])
   .controller('login', require('./controllers/login'))
   .controller('signup', require('./controllers/signup'))
   .controller('user', require('./controllers/user'))
+  .controller('modules', require('./controllers/modules'))
+  .controller('admin', require('./controllers/admin'))
   .config(function($stateProvider) {
     $stateProvider
+    
+      /**
+       * Core Routes
+       */
       .state('home', {
         url: '/',
         controller: 'home',
@@ -25,42 +31,6 @@ angular.module('routes', ['ui.router'])
         template: require('./views/login'),
         controller: 'login',
       })
-      // Users
-      .state('user', {
-        url: '/user',
-        template: require('./views/user'),
-        controller: 'user',
-      })
-      // Admins
-      .state('admin', {
-        url: '/admin',
-        template: require('./views/admin'),
-        controller: 'admin',
-      })
-      // Organizations
-      .state('orgs', {
-        url: '/orgs',
-        template: require('./views/orgs'),
-        controller: 'orgs',
-      })
-      // Modules
-      .state('modules', {
-        url: '/modules',
-        template: require('./views/modules'),
-        controller: 'modules',
-      })
-      // Classes
-      //.state('classes', {
-      //  url: '/classes',
-      //  template: require('./views/classes'),
-      //  controller: 'classes',
-      //})
-      // Courses
-      .state('courses', {
-        url: '/courses',
-        template: require('./views/courses'),
-        controller: 'courses',
-      })
       // Static about page
       .state('about', {
         url: '/about',
@@ -76,6 +46,60 @@ angular.module('routes', ['ui.router'])
       .state('reset', {
         url: '/reset',
         template: require('./views/reset'),
+      })
+      /**
+       * User routes
+       */
+      .state('user', {
+        url: '/user',
+        template: require('./views/user'),
+        controller: 'user',
+      })
+      .state('user.id', {
+        url: '/user/:id',
+        template: require('./views/user'),
+        controller: 'user',
+      })
+      /**
+       * Admin Routes
+       */
+      .state('admin', {
+        url: '/admin',
+        template: require('./views/admin'),
+        controller: 'admin',
+      })
+      /**
+       * Organization Routes
+       */
+      .state('orgs', {
+        url: '/orgs',
+        template: require('./views/orgs'),
+        controller: 'orgs',
+      })
+      /**
+       * Module Routes
+       */
+      .state('modules', {
+        url: '/modules',
+        template: require('./views/modules'),
+        controller: 'modules',
+      })
+      /**
+       * Class Routes
+       */
+      // Classes
+      //.state('classes', {
+      //  url: '/classes',
+      //  template: require('./views/classes'),
+      //  controller: 'classes',
+      //})
+      /**
+       * Course Routes
+       */
+      .state('courses', {
+        url: '/courses',
+        template: require('./views/courses'),
+        controller: 'courses',
       })
 
   })
