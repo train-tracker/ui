@@ -9,6 +9,7 @@ angular.module('routes', ['ui.router'])
   .controller('admin', require('./controllers/admin'))
   .controller('classes', require('./controllers/classes'))
   .controller('orgs', require('./controllers/orgs'))
+  .controller('orgs.create-edit', require('./controllers/orgs/create-edit'))
   .controller('courses', require('./controllers/courses'))
   .config(function($stateProvider) {
     $stateProvider
@@ -79,11 +80,32 @@ angular.module('routes', ['ui.router'])
         url: '/orgs',
         template: require('./views/orgs'),
         controller: 'orgs',
-          resolve: {
-              org: function(Org) {
-                  return Org.getList();
-              }
+        resolve: {
+           orgs: function(Orgs) {
+             return Orgs.getList();
+            }
           }
+      })
+      .state('orgs.create', {
+        url: '/create',
+        template: require('./views/orgs/create-edit'),
+        controller: 'orgs.create-edit',
+        resolve: {
+          org: function () {
+            return {}
+          }
+
+        }
+      })
+      .state('orgs.edit', {
+        url: '/:id',
+        template: require('./views/orgs/create-edit'),
+        controller: 'orgs.create-edit',
+        resolve: {
+          org: function (orgs, $stateParams) {
+            return _.find(orgs, {id: $stateParams.id})
+          }
+        }
       })
       /**
        * Module Routes
@@ -106,7 +128,6 @@ angular.module('routes', ['ui.router'])
           module: function () {
             return {}
           }
-
         }
       })
       .state('modules.edit', {

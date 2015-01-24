@@ -1,9 +1,7 @@
-/* 
- * See license.txt for license information.
- */
-
 module.exports = function(Restangular) {
-    var Orgs = Restangular.all('orgs');
+    var Org = Restangular.all('orgs');
 
-    return Orgs;
+    console.log("Hit: app/common/resources/org.js");
+    
+    return Org;
 }

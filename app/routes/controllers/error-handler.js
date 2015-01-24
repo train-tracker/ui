@@ -3,7 +3,9 @@ module.exports = function($scope, $modal, $state) {
   $scope.$watch('areErrors', function (areErrors) {
     if(!areErrors)
       return;
-
+    
+    console.log("There were errors that hit error-handler.js");
+    
     var controller, template
     if($scope.error.status = 403) {
       controller = 'login'
@@ -29,9 +31,8 @@ module.exports = function($scope, $modal, $state) {
         $http.post(API_ROOT + '/login', user).success(function(){
           $state.go('user');
           $scope.$dismiss();
-            console.log("app/routes/controllers/error-handler.js: login in error-handler, before finally!");
         }).finally(function() {
-            console.log("app/routes/controllers/error-handler.js: login in error-handler!");
+            
         });
 
       }

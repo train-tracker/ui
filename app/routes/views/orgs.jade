@@ -1,1 +1,11 @@
 h1 Organizations Index
+
+.col-md-4
+  a.btn.btn-success(ui-sref="orgs.create") Create New Organization
+  table.table.table-striped
+    tr(ng-repeat="org in orgs")
+      td {{org.name}}
+      td.controls
+        button.btn.btn-warning(ui-sref="orgs.edit({id: org.id})") Edit
+        button.btn.btn-danger(ng-click="removeOrg(org, $index)") Delete
+.col-md-7(ui-view="")
