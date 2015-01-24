@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function($scope, CoolThings) {
+module.exports = function($scope, User) {
 
   // An example of the Restangular service in use.
   // It's commented out because it will throw an error since it actually isn't getting anything
