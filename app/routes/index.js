@@ -8,7 +8,7 @@ angular.module('routes', ['ui.router'])
   .controller('admin', require('./controllers/admin'))
   .config(function($stateProvider) {
     $stateProvider
-    
+
       /**
        * Core Routes
        */
