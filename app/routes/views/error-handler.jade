@@ -10,9 +10,9 @@ script(type="text/ng-template", id="/login.html")
   .modal-body
     form.form-inline(ng-submit="login(user)")
       .form-group
-        input.form-control(type="text" ng-model="user.email" name="email" placeholder="Email")
+        input.form-control(type="text" ng-model="user.email" name="email" placeholder="Email" ng-init="user.email = 'test@user.com'")
       .form-group
-        input.form-control(type="password" ng-model="user.password" name="password" placeholder="Password")
+        input.form-control(type="password" ng-model="user.password" name="password" placeholder="Password" ng-init="user.password = '1234'")
       .form-group
         input.btn.default(type="submit" value="Login")
   .modal-footer
