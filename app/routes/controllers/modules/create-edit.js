@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function($scope, module, modules) {
+module.exports = function($scope, module, modules, $state) {
   if(_.isEmpty(module)){
     $scope.creating = true
     $scope.module = {}
@@ -10,17 +10,22 @@ module.exports = function($scope, module, modules) {
   }
 
   $scope.submitModule = function (module) {
+    var promise
     if($scope.creating) {
-      modules.post(module).then(function (module) {
+      promise = modules.post(module).then(function (module) {
         $scope.modules.push(module)
         $scope.module = {}
         $scope.creating = false
       })
     } else {
-      module.put().then(function (module) {
+      promise = module.put().then(function (module) {
         $scope.module = {}
         $scope.editing = false
       })
     }
+
+    promise.finally(function () {
+      $state.go('modules')
+    })
   }
 };
