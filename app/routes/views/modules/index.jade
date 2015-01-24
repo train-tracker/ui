@@ -1,0 +1,6 @@
+h1 Modules
+table.table.table-striped
+  tr(ng-repeat="module in modules")
+    td {{module.name}}
+    td.controls
+      button.btn.btn-success(ui-sref="modules.start({moduleID: module.id})") Start

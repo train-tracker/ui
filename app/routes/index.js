@@ -4,10 +4,15 @@ angular.module('routes', ['ui.router'])
   .controller('login', require('./controllers/login'))
   .controller('signup', require('./controllers/signup'))
   .controller('user', require('./controllers/user'))
-  .controller('modules', require('./controllers/modules'))
-  .controller('modules.create-edit', require('./controllers/modules/create-edit'))
-  .controller('modules.questions', require('./controllers/questions'))
+
   .controller('admin', require('./controllers/admin'))
+  .controller('admin.modules', require('./controllers/admin/modules'))
+  .controller('admin.modules.create-edit', require('./controllers/admin/modules-create-edit'))
+  .controller('admin.modules.questions', require('./controllers/questions'))
+
+  .controller('modules', require('./controllers/modules'))
+  .controller('modules.start', require('./controllers/modules/start'))
+
   .controller('classes', require('./controllers/classes'))
   .controller('courses.create-edit', require('./controllers/courses/create-edit'))
   .controller('orgs', require('./controllers/orgs'))
@@ -60,6 +65,7 @@ angular.module('routes', ['ui.router'])
         url: '/test',
         template: require('./views/test'),
       })
+
       /**
        * User routes
        */
@@ -73,86 +79,59 @@ angular.module('routes', ['ui.router'])
         template: require('./views/user'),
         controller: 'user',
       })
+
       /**
        * Admin Routes
        */
       .state('admin', {
         url: '/admin',
+        abstract: true,
         template: require('./views/admin'),
-        controller: 'admin',
-      })
-      /**
-       * Organization Routes
-       */
-      .state('orgs', {
-        url: '/orgs',
-        template: require('./views/orgs'),
-        controller: 'orgs',
-        resolve: {
-           orgs: function(Orgs) {
-             return Orgs.getList();
-            }
-          }
-      })
-      .state('orgs.create', {
-        url: '/create',
-        template: require('./views/orgs/create-edit'),
-        controller: 'orgs.create-edit',
-        resolve: {
-          org: function () {
-            return {}
-          }
-
-        }
-      })
-      .state('orgs.edit', {
-        url: '/:id',
-        template: require('./views/orgs/create-edit'),
-        controller: 'orgs.create-edit',
-        resolve: {
-          org: function (orgs, $stateParams) {
-            return _.find(orgs, {id: $stateParams.id})
-          }
-        }
+        // controller: 'admin'
       })
 
+
+
       /**
-       * Module Routes
+       * Admin Module
        */
-      .state('modules', {
+
+
+
+      .state('admin.modules', {
         url: '/modules',
-        template: require('./views/modules'),
-        controller: 'modules',
+        template: require('./views/admin/modules'),
+        controller: 'admin.modules',
           resolve: {
             modules: function(Module) {
               return Module.getList();
             }
           }
       })
-      .state('modules.create', {
+      .state('admin.modules.create', {
         url: '/create',
-        template: require('./views/modules/create-edit'),
-        controller: 'modules.create-edit',
+        template: require('./views/admin/modules-create-edit'),
+        controller: 'admin.modules.create-edit',
         resolve: {
           module: function () {
             return {}
           }
         }
       })
-      .state('modules.edit', {
+      .state('admin.modules.edit', {
         url: '/:id',
-        template: require('./views/modules/create-edit'),
-        controller: 'modules.create-edit',
+        template: require('./views/admin/modules-create-edit'),
+        controller: 'admin.modules.create-edit',
         resolve: {
           module: function (modules, $stateParams) {
             return _.find(modules, {id: $stateParams.id})
           }
         }
       })
-      .state('modules.questions', {
+      .state('admin.modules.questions', {
         url: '/:moduleID/questions',
         template: require('./views/questions/index'),
-        controller: 'modules.questions',
+        controller: 'admin.modules.questions',
         resolve: {
           questions: function(modules, $stateParams) {
             var module = _.find(modules, {id: $stateParams.moduleID})
@@ -160,72 +139,140 @@ angular.module('routes', ['ui.router'])
           }
         }
       })
-      /**
-       * Class Routes
-       */
-      .state('classes', {
-        url: '/classes',
-        template: require('./views/classes'),
-        controller: 'classes',
-          resolve: {
-              modules: function(Class) {
-                  return Class.getList();
-              }
-          }
-      })
-      .state('classes.create', {
-        url: '/create',
-        template: require('./views/classes/create-edit'),
-        controller: 'classes.create-edit',
-        resolve: {
-          org: function () {
-            return {}
-          }
 
-        }
-      })
-      .state('classes.edit', {
-        url: '/:id',
-        template: require('./views/classes/create-edit'),
-        controller: 'classes.create-edit',
-        resolve: {
-          org: function (orgs, $stateParams) {
-            return _.find(orgs, {id: $stateParams.id})
-          }
-        }
-      })
       /**
-       * Course Routes
+       * Modules
        */
-      .state('courses', {
-        url: '/courses',
-        template: require('./views/courses'),
-        controller: 'courses',
-          resolve: {
-              courses: function(Courses) {
-                  return Courses.getList();
+      .state('modules', {
+        url: '/modules',
+        template: require('./views/modules/index'),
+        controller: 'modules',
+        resolve: {
+          modules: function (Module) {
+            return Module.getList()
+          }
+        }
+      })
+      .state('modules.start', {
+        url: '/:moduleID?currentQuestion',
+        views: {
+          '@': {
+            template: require('./views/modules/start'),
+            controller: 'modules.start',
+            resolve: {
+              module: function (modules, $stateParams) {
+                return _.find(modules, {id: $stateParams.moduleID})
+              },
+              questions: function (module) {
+                return module.getQuestions()
               }
+            }
           }
+        }
       })
-      .state('courses.create', {
-        url: '/create',
-        template: require('./views/courses/create-edit'),
-        controller: 'courses.create-edit',
-        resolve: {
-          org: function () {
-            return {}
-          }
 
-        }
-      })
-      .state('courses.edit', {
-        url: '/:id',
-        template: require('./views/courses/create-edit'),
-        controller: 'courses.create-edit',
-        resolve: {
-          org: function (orgs, $stateParams) {
-            return _.find(orgs, {id: $stateParams.id})
-          }
-        }
-      })
+      // /**
+      //  * Organization Routes
+      //  */
+      // .state('orgs', {
+      //   url: '/orgs',
+      //   template: require('./views/orgs'),
+      //   controller: 'orgs',
+      //   resolve: {
+      //      orgs: function(Orgs) {
+      //        return Orgs.getList();
+      //       }
+      //     }
+      // })
+      // .state('orgs.create', {
+      //   url: '/create',
+      //   template: require('./views/orgs/create-edit'),
+      //   controller: 'orgs.create-edit',
+      //   resolve: {
+      //     org: function () {
+      //       return {}
+      //     }
+
+      //   }
+      // })
+      // .state('orgs.edit', {
+      //   url: '/:id',
+      //   template: require('./views/orgs/create-edit'),
+      //   controller: 'orgs.create-edit',
+      //   resolve: {
+      //     org: function (orgs, $stateParams) {
+      //       return _.find(orgs, {id: $stateParams.id})
+      //     }
+      //   }
+      // })
+
+      // /**
+      //  * Class Routes
+      //  */
+      // .state('classes', {
+      //   url: '/classes',
+      //   template: require('./views/classes'),
+      //   controller: 'classes',
+      //     resolve: {
+      //         modules: function(Class) {
+      //             return Class.getList();
+      //         }
+      //     }
+      // })
+      // .state('classes.create', {
+      //   url: '/create',
+      //   template: require('./views/classes/create-edit'),
+      //   controller: 'classes.create-edit',
+      //   resolve: {
+      //     org: function () {
+      //       return {}
+      //     }
+
+      //   }
+      // })
+      // .state('classes.edit', {
+      //   url: '/:id',
+      //   template: require('./views/classes/create-edit'),
+      //   controller: 'classes.create-edit',
+      //   resolve: {
+      //     org: function (orgs, $stateParams) {
+      //       return _.find(orgs, {id: $stateParams.id})
+      //     }
+      //   }
+      // })
+
+      // /**
+      //  * Course Routes
+      //  */
+      // .state('courses', {
+      //   url: '/courses',
+      //   template: require('./views/courses'),
+      //   controller: 'courses',
+      //     resolve: {
+      //         courses: function(Courses) {
+      //             return Courses.getList();
+      //         }
+      //     }
+      // })
+      // .state('courses.create', {
+      //   url: '/create',
+      //   template: require('./views/courses/create-edit'),
+      //   controller: 'courses.create-edit',
+      //   resolve: {
+      //     org: function () {
+      //       return {}
+      //     }
+
+      //   }
+      // })
+      // .state('courses.edit', {
+      //   url: '/:id',
+      //   template: require('./views/courses/create-edit'),
+      //   controller: 'courses.create-edit',
+      //   resolve: {
+      //     org: function (orgs, $stateParams) {
+      //       return _.find(orgs, {id: $stateParams.id})
+      //     }
+      //   }
+      // })
   })
