@@ -8,6 +8,8 @@ angular.module('routes', ['ui.router'])
   .controller('modules.create-edit', require('./controllers/modules/create-edit'))
   .controller('admin', require('./controllers/admin'))
   .controller('classes', require('./controllers/classes'))
+  .controller('orgs', require('./controllers/orgs'))
+  .controller('courses', require('./controllers/courses'))
   .config(function($stateProvider) {
     $stateProvider
 
@@ -77,6 +79,11 @@ angular.module('routes', ['ui.router'])
         url: '/orgs',
         template: require('./views/orgs'),
         controller: 'orgs',
+          resolve: {
+              org: function(Org) {
+                  return Org.getList();
+              }
+          }
       })
       /**
        * Module Routes
@@ -132,6 +139,11 @@ angular.module('routes', ['ui.router'])
         url: '/courses',
         template: require('./views/courses'),
         controller: 'courses',
+          resolve: {
+              courses: function(Courses) {
+                  return Courses.getList();
+              }
+          }
       })
 
   })
