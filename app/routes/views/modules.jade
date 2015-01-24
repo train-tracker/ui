@@ -6,6 +6,7 @@ h1 Module List
     tr(ng-repeat="module in modules")
       td {{module.name}}
       td.controls
-        button.btn.btn-warning(ui-sref="modules.edit({id: module.id})") Edit
+        a.btn.btn-warning(ui-sref="modules.edit({id: module.id})") Edit
         button.btn.btn-danger(ng-click="removeModule(module, $index)") Delete
-.col-md-7(ui-view="")
+        a.btn.btn-info(ui-sref="modules.questions({moduleID: module.id})") View Questions
+.col-md-8(ui-view="")
