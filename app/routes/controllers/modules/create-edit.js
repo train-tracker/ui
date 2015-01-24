@@ -13,7 +13,7 @@ module.exports = function($scope, module, modules, $state) {
     var promise
     if($scope.creating) {
       promise = modules.post(module).then(function (module) {
-        $scope.modules.push(module)
+        $scope.modules.push(angular.copy(module))
         $scope.module = {}
         $scope.creating = false
       })
