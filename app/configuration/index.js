@@ -1,6 +1,5 @@
 var configuration = {
-   'API_ROOT':'http://dockerhost' 
-    
+   'API_ROOT':'http://dockerhost'
 }
 
 

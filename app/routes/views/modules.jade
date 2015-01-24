@@ -1,3 +1,26 @@
 h1 Module List
 
-p(ng-repeat="module in modules") {{module.name}} 
+.col-md-4
+  button.btn.btn-success(ng-click="creating = !creating")
+    span Create New Module
+  table.table.table-striped
+    tr(ng-repeat="module in modules")
+      td {{module.name}}
+      td.controls
+        button.btn.btn-warning(ng-click="editModule(module, $index)") Edit
+        button.btn.btn-danger(ng-click="removeModule(module, $index)") Delete
+.col-md-7
+  form.form-horizontal.col-md-12(ng-submit="submitModule(module, creating)", ng-show="creating || editing")
+    .form-group
+      label.col-md-2.control-label Name:
+      .col-md-10
+        input.form-control(type="text", ng-model="module.name", name="name", placeholder="Name")
+    .form-group
+      label.col-md-2.control-label Description:
+      .col-md-10
+        input.form-control(type="text", ng-model="module.description", name="description", placeholder="Description")
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        button.btn.btn-default(type='submit')
+          span(ng-show="creating") Create
+          span(ng-show="editing") Save

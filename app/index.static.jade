@@ -25,15 +25,17 @@ html(lang="en-US",ng-app="app")
                   |  Train Track
               .collapse.navbar-collapse
                 ul.nav.pull-right
-                  li.active
-                    a(href='#') Home
+                  li
+                    a(ui-sref='home') Home
+                  li
+                    a(ui-sref='modules') Modules
       section.header-2-sub.bg-turquoise
         .background
         .container
           .row
             .col-sm-8.col-sm-offset-2
               .hero-unit
-      .content(ui-view="")
+      .content.container(ui-view="")
     // footer-1
     footer.footer-1.bg-turquoise
       .container
