@@ -5,12 +5,12 @@ module.exports = function(Restangular) {
     return Restangular.one('register').post('', user);
   }
 
-  User.resetPassword = function () {
-
+  User.resetPassword = function (email) {
+    return Restangular.one('resetPassword').post('', email);
   };
 
-  User.verify = function() {
-
+  User.verify = function(token) {
+    return Restangular.one('verify').post('', token);
   };
 
   return User;
