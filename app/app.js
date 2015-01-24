@@ -19,3 +19,4 @@ angular.module('app',
       .when('', '/')
       .otherwise("/404")
   })
+  .config(require('./configuration/restangular'))

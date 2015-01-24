@@ -1,4 +1,8 @@
-var configuration = {}
+var configuration = {
+   'API_ROOT':'http://dockerhost' 
+    
+}
+
 
 // Create the config object
 
