@@ -27,9 +27,11 @@ module.exports = function($scope, $modal, $state) {
 
         // Handle login
         $http.post(API_ROOT + '/login', user).success(function(){
-          $state.go('user')
-          $scope.$dismiss()
+          $state.go('user');
+          $scope.$dismiss();
+            console.log("app/routes/controllers/error-handler.js: login in error-handler, before finally!");
         }).finally(function() {
+            console.log("app/routes/controllers/error-handler.js: login in error-handler!");
         });
 
       }
