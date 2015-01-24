@@ -1,0 +1,12 @@
+h1 Module List
+
+.col-md-4
+  a.btn.btn-success(ui-sref="admin.modules.create") Create New Module
+  table.table.table-striped
+    tr(ng-repeat="module in modules")
+      td {{module.name}}
+      td.controls
+        a.btn.btn-warning(ui-sref="admin.modules.edit({id: module.id})") Edit
+        button.btn.btn-danger(ng-click="removeModule(module, $index)") Delete
+        a.btn.btn-info(ui-sref="admin.modules.questions({moduleID: module.id})") View Questions
+.col-md-8(ui-view="")
