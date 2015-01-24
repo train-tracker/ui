@@ -22,6 +22,7 @@
     "ui-router": "~0.2.11",
     "restangular": "~1.4.0",
     "uikit": "~2.16.2",
-    "bootstrap": "~3.3.2"
+    "bootstrap": "~3.3.2",
+    "angular-bootstrap": "~0.11.0"
   }
 }

@@ -7,6 +7,7 @@ angular.module('app',
     'configuration',
 
     'ui.router',
+    'ui.bootstrap',
     'restangular',
 
     'common',
