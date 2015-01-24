@@ -1,8 +1,6 @@
 'use strict';
 
-module.exports = function(){};
-/*
-module.exports = function($scope, class, classes, $state) {
+module.exports = function($scope, course, courses, $state) {
   if(_.isEmpty(course)){
     $scope.creating = true
     $scope.course = {}
@@ -31,4 +29,3 @@ module.exports = function($scope, class, classes, $state) {
     })
   }
 };
-*/
