@@ -25,7 +25,7 @@ module.exports = function($scope, module, modules, $state) {
     }
 
     promise.finally(function () {
-      $state.go('modules')
+      $state.go('^')
     })
   }
 };
