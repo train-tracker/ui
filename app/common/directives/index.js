@@ -4,15 +4,16 @@ angular.module('directives', []).
 
       function link(scope, element, attrs) {
 
-          // When finished loading, update the element
-          $(element).onloadedmetadata = function() {
-                this.currentTime = scope.startTime;
-          };
+        // When finished loading, update the element
+        $(element).onloadedmetadata = function() {
+          this.currentTime = scope.startTime;
+        };
+
       }
 
       return {
           link: link,
-          scope: { height: "@",  width: "@", source: "@", startTime: "=" },
+          scope: { height: "@",  width: "@", source: "@", startTime: "=", doneCallback: '&' },
           restrict: 'A',
           template: require('./views/video')
       };

@@ -1,5 +1,15 @@
 h2 {{module.name}}
-
-//- em.small {{questions.length}} questions
-
-//- p {{currentQuestion|json}}
+.col-md-12(delay-video, source="{{module.video}}" width="100%", ng-if="showVideo")
+button.btn.btn-default.pull-right(ng-click="showQuiz = true; showVideo = false") Continue
+form.col-md-12.form.form-horizontal(ng-submit="gradeQuiz(answers)", ng-show="showQuiz")
+  div(ng-repeat="question in questions", ng-class="{'has-error': answers[question.id].error}")
+    h4(ng-class="{'has-error': answers[question.id].error}") {{$index+1}}. {{question.text}}
+    span.text-error(ng-show="answers[question.id].error && !answers[question.id].answer") Please answer this question
+    span(ng-show="answers[question.id].error && answers[question.id].answer" ng-click="setVideoTime(module, question)") Play Relevant Video Section
+    .radio(ng-repeat="choice in question.choices")
+      label
+        input(type="radio", value="{{$index+1}}", ng-model="answers[question.id].answer")
+        | {{choice.text}}
+  .form-group.col-md-offset-2.col-md-12
+    br
+    button.btn.btn-default(type="submit") Grade
