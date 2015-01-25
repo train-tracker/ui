@@ -1,6 +1,6 @@
 h2 {{module.name}}
 .col-md-12(delay-video, source="{{module.video}}" width="100%", ng-if="showVideo")
-button.btn.btn-default.pull-right(ng-click="showQuiz = true; showVideo = false") Continue
+button.btn.btn-default.pull-right(ng-click="showQuiz = true; showVideo = false", ng-show="showVideo") Continue
 form.col-md-12.form.form-horizontal(ng-submit="gradeQuiz(answers)", ng-show="showQuiz")
   div(ng-repeat="question in questions", ng-class="{'has-error': answers[question.id].error}")
     h4(ng-class="{'has-error': answers[question.id].error}") {{$index+1}}. {{question.text}}
